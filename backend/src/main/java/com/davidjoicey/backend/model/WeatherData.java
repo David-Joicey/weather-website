@@ -1,8 +1,10 @@
 package com.davidjoicey.backend.model;
 
-public record WeatherData (
+public record WeatherData(
+    // ISO date: 2026-08-12
+    String date,
     double temperature,
     double humidity,
     double precipitation,
-    String description
+    int weathercode
 ) {}
