@@ -7,27 +7,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.davidjoicey.backend.model.WeatherData;
 import com.davidjoicey.backend.model.WeatherForecast;
+import com.davidjoicey.backend.service.WeatherService;
 
-import jakarta.annotation.PostConstruct;
 
 @RestController
 @RequestMapping("/weather")
 public class WeatherController {
+    private final WeatherService weatherService;
+
+    public WeatherController(WeatherService weatherService) {
+        this.weatherService = weatherService;
+    }
+
     @GetMapping("/{city}")
     public WeatherForecast getWeather(@PathVariable String city) {
+        return weatherService.getForecast(city);
 
-        List<WeatherData> daily = List.of(
-            new WeatherData(15.7, 50.2, 1.3, "cloudy"),
-            new WeatherData(20.1, 70.6, 5.0, "Sunny")
-        );
-
-        return new WeatherForecast(
-            city,
-            53.8,
-            -1.55,
-            daily
-        );
     }
 }
