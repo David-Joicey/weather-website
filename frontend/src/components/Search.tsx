@@ -1,14 +1,19 @@
-function home() {
-    return(
-        <div>
-            <h1>Weather Search</h1>
+import "./Search.css";
 
-            <input
-            type = "text"
-            placeholder = "Location"
-            />
+function search() {
+    return(
+        <div className = "page-container">
+            <h1 className = "title">Weather Search</h1>
+
+            <div className = "search-container">
+                <input
+                className = "search-bar"
+                type = "text"
+                placeholder = "Location..."
+                />
+            </div>
 
         </div>
     )
 }
-export default home;
+export default search;
