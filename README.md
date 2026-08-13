@@ -1,3 +1,5 @@
 # weather-website
 
-http://localhost:8080
+Backend: http://localhost:8080
+
+Frontend http://localhost:5173/
