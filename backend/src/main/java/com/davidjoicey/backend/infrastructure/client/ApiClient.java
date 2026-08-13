@@ -15,12 +15,12 @@ public class ApiClient {
     @Value("${openmeteo.forecast.url}")
     private String forecastUrl;
 
-    @Value("${openmeteo.geocode.url}")
+    @Value("${openmeteo.geocoding.url}")
     private String geocodeUrl;
 
-    public GeocodeResponse geocode(String city) {
+    public GeocodeResponse geocode(String location) {
         return restClient.get()
-            .uri(geocodeUrl + "?name={city}", city)
+            .uri(geocodeUrl + "?name={city}", location)
             .retrieve()
             .body(GeocodeResponse.class);
     }
@@ -29,8 +29,9 @@ public class ApiClient {
         return restClient.get()
             .uri(forecastUrl +
                  "?latitude={lat}&longitude={lon}" +
-                 "&daily=temperature_2m_max,weathercode",
-                 lat, lon)
+                "&daily=temperature_2m_max,temperature_2m_min,relative_humidity_2m_max,precipitation_sum,weathercode" +
+                "&timezone=auto",
+             lat, lon)
             .retrieve()
             .body(ForecastResponse.class);
     }
