@@ -46,3 +46,10 @@
 .search-button:hover {
   background-color: rgb(77, 149, 189);
 }
+
+.weather-grid {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  margin-top: 2rem;
+  gap: 1rem;
+}

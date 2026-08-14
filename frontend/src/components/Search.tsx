@@ -1,15 +1,28 @@
 import "./Search.css";
 import { getWeather } from "../api/weather";
 import { useState } from "react";
+import WeatherCard from "../components/WeatherCard";
+
+interface WeatherCardAttributes {
+    date: string;
+    data: {
+        maxTemp: number;
+        minTemp: number;
+        humidity: number;
+        precipitation: number;
+        weatherCode: number;
+    }
+}
 
 function search() {
     const [location, setLocation] = useState("");
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [weather, setWeather] = useState<any>(null);
+    const [weather, setWeather] = useState<WeatherCardAttributes[]>([]);
 
-    async function handleSubmit(e: React.FormEvent) {
+
+    async function handleSubmit(e: React.SubmitEvent) {
         e.preventDefault();
 
         if (!location.trim()) return;
@@ -19,9 +32,24 @@ function search() {
 
         try {
             const data = await getWeather(location);
+
+            console.log("RAW backend response:", data);
+
+            const cards = data.weatherData.map((day: any) => ({
+                date: day.date,
+                data: {
+                    maxTemp: day.maxTemp,
+                    minTemp: day.minTemp,
+                    humidity: day.humidity,
+                    precipitation: day.precipitation,
+                    weatherCode: day.weatherCode
+                }
+            }));
+
             console.log("Weather data:", data);
-            setWeather(data);
+            setWeather(cards);
         } catch (err) {
+            console.error("Fetch error:", err);
             setError("Could not fetch weather data");
         } finally {
             setLoading(false);
@@ -46,7 +74,17 @@ function search() {
 
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
-            {weather && <pre>{JSON.stringify(weather, null, 2)}</pre>}
+            {weather && (
+                <div className="weather-grid">
+                    {weather.map((card: WeatherCardAttributes, index: number) => (
+                        <WeatherCard
+                            key={index}
+                            date={card.date}
+                            data={card.data}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     )
 }
