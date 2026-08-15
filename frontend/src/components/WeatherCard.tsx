@@ -1,4 +1,5 @@
 import "./WeatherCard.css";
+import weatherCodeConverter from "./weatherCodeConverter";
 
 interface WeatherCardAttributes {
     date: string;
@@ -21,7 +22,7 @@ function WeatherCard(weatherCardAttributes: WeatherCardAttributes) {
                 <p>Min Temp: {weatherCardAttributes.data.minTemp}*C</p>
                 <p>Humidity: {weatherCardAttributes.data.humidity}%</p>
                 <p>Precipitation: {weatherCardAttributes.data.precipitation}mm</p>
-                <p>Weather Code: {weatherCardAttributes.data.weatherCode}</p>
+                <p>Weather: {weatherCodeConverter(weatherCardAttributes.data.weatherCode)}</p>
             </div>
         </div>
     )
