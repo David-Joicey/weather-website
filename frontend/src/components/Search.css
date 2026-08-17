@@ -6,6 +6,8 @@
     min-height: 100vh;
     padding-top: 10rem;
     font-family: sans-serif;
+
+    background: linear-gradient(0deg,rgba(143, 240, 255, 0.65) 0%, rgba(143, 240, 255, 0.65) 1%, rgba(255, 255, 255, 1) 100%);
 }
 
 .title {
