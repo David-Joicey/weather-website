@@ -1,10 +1,10 @@
 .weather-card-container {
-  background: #ffffff;
+  background: #ffff;
   border-radius: 20px;
   padding: 1rem;
   padding-top: 0.05rem;
   padding-left: 1.5rem;
-  padding-bottom: 2.5rem;
+  padding-bottom: 5rem;
   width: 180px;
   height: 140px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
